@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\PostController;
 use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Routing\Annotation\Route as AnnotationRoute;
 
 Route::get('/', function () {
     return view('home', [
@@ -19,7 +22,20 @@ Route::get('/about', function () {
     ]);
 });
 
-Route::get('/blog', [PostController::class, 'index']);
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
-// halaman single post
-Route::get('posts/{post:slug}', [PostController::class, 'show']);
+Route::get('/category', function(){
+    return view('categories', [
+        'title' => 'Post Categories',
+        'categories' => Category::all()
+    ]);
+});
+
+Route::get('/category/{category:slug}', function(Category $category){
+    return view('category', [
+        'title' => $category->name,
+        'posts' => $category->posts,
+        'category' => $category->name
+    ]);
+});

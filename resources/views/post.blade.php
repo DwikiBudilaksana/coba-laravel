@@ -1,11 +1,12 @@
 @extends('layouts.main')
 
 @section('container')
-    <article>
-        <h2>{{ $post->title }}</h2>
-        <p>By. Made Dwiki Budi Laksana in <a href="/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
-        {!! $post->body !!}
-    </article>
+        <h1 class="mb-5">{{ $post->title }}</h1>
 
-    <a href="/blog">Back to Posts</a>
+        <p>By. <a href="#" class="text-decoration-none"></a> <a href="/category/{{ $post->category->slug }}">{{ $post->category->name }}</a></p>
+
+        {!! $post->body !!}
+
+    <a href="/posts" class="d-block mt-3">Back to Posts</a>
+
 @endsection
